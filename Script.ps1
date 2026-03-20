@@ -1,4 +1,9 @@
-﻿# Chap 2: Setting up Your Env
+﻿# CHAPTER 1: INTRODUCTION TO KUBERNETES
+
+
+# CHAPTER 2: SETTING UP YOUR ENVIRONMENT
+
+# Chap 2: Setting up Your Env
 Here are the key takeaways from the video:
 
 Podman Desktop: Simplifies running containers on regular machines and is similar to Docker Desktop or Rancher Desktop.
@@ -115,4 +120,12 @@ az login --service-principal --username <appId> --password <password> --tenant <
 
 # Verification: Confirm the login by checking the user property in the returned JSON object, which should indicate servicePrincipal.
 
+
+###########################################################################################################################
+# CHAPTER 3: BUILDING CONTAINER IMAGES WITH PODMAN AND DOCKER'S BUILDKIT
+# # Here are the key takeaways from the video on building container images with Podman and Docker's BuildKit:
+
+# # Review Container Configuration File: Understand the structure and purpose of Explore California's container configuration file, commonly called a Dockerfile or Containerfile.
+# # Build Container Image: Use the configuration file to build a container image.
+# # Create and Test Container: Create a container from the image and test its ability to run within Kubernetes.
 
