@@ -104,29 +104,15 @@ az group list
 
 # Create a Service Principal: Use the Azure CLI to create a service principal with az ad sp create-for-rbac.
 az account show
-PS C:\Users\Johnnyvng.JVDNT\Documents\GitHub\kubernetes> az account show
-{
-  "environmentName": "AzureCloud",
-  "homeTenantId": "12630675-1f0d-411c-ace5-a77cd5f48912",
-  "id": "5eaeebcc-b962-4628-98d1-8e0fe5d276a3",
-  "isDefault": true,
-  "managedByTenants": [],
-  "name": "Azure for Students",
-  "state": "Enabled",
-  "tenantDefaultDomain": "exchangelabs.gmu.edu",
-  "tenantDisplayName": "George Mason University",
-  "tenantId": "12630675-1f0d-411c-ace5-a77cd5f48912",
-  "user": {
-    "name": "dnguye33@masonlive.gmu.edu",
-    "type": "user"
-  }
-}
 
-
-az ad sp create-for-rbac --name "myServicePrincipal" --role="Owner" --scopes="/subscriptions/5eaeebcc-b962-4628-98d1-8e0fe5d276a3"
 
 # Set Role and Scope: Assign the service principal an owner role and specify the subscription scope.
+az ad sp create-for-rbac --name "myServicePrincipal" --role="Owner" --scopes="/subscriptions/5eaeebcc-b962-4628-98d1-8e0fe5d276a3" 
+
+
 # Login with Service Principal: Use az login --service-principal along with the app ID, password, and tenant ID to log in.
+az login --service-principal --username <appId> --password <password> --tenant <tenantId>
+
 # Verification: Confirm the login by checking the user property in the returned JSON object, which should indicate servicePrincipal.
 
 
