@@ -59,10 +59,17 @@ Expand-Archive "$env:TEMP\AzureCLI.zip" -DestinationPath "$HOME\azure-cli" -Forc
 
 
 # INSTALL EKSCTL
+
+# Here are the key takeaways from the video on installing EKS CTL:
+
+# Installation on Mac: Visit eksctl.io, navigate to the installation section, copy the Unix installation command, and run it in the terminal.
+# Installation on Windows: Visit eksctl.io, navigate to the installation section, download the appropriate zip file, and use PowerShell to extract and move it to the apps directory.
+# Verification: Confirm the installation by running eksctl version to ensure it returns a version number.
+
 # Download from https://github.com/eksctl-io/eksctl
 Expand-Archive -DestinationPath C:\Users\Johnnyvng.JVDNT\Apps\ C:\Users\Johnnyvng.JVDNT\Downloads\eksctl_Windows_amd64.zip
 
-
+# CONFIGURE AWS CLI
 # SETUP USER > ROLE IN AWS then copy Access Key ID and Secret Access Key
 # Creating a User: Create a user in AWS IAM without permissions and generate access keys.
 # Creating a Role: Create a role with specific permissions and configure trust relationships to allow the user to assume the role.
@@ -78,9 +85,48 @@ $env:AWS_ACCESS_KEY_ID = $role.Credentials.AccessKeyId
 $env:AWS_SECRET_ACCESS_KEY = $role.Credentials.SecretAccessKey
 $env:AWS_SESSION_TOKEN = $role.Credentials.SessionToken
 
-
-
 # Verification: Verify the setup by running AWS CLI commands to ensure permissions are correctly applied.
 aws sts get-caller-identity
 aws ec2 describe-instances --max-items 1
+
+
+# CONFIGURE AZURE CLI
+# Here are the key takeaways from the video on configuring Azure access interactively:
+
+# Interactive Login Method: This method is easy to use but not suitable for automation as it requires a browser for login.
+# Running az login: On Windows, a pop-up will appear for login; on Mac, use az login --use-device-code to authenticate via a code.
+az login
+# Verification: After logging in, you can verify by running az group list to see the groups in your subscription.
+az group list
+
+
+# Here are the key takeaways from the video on logging into Azure with a service principal:
+
+# Create a Service Principal: Use the Azure CLI to create a service principal with az ad sp create-for-rbac.
+az account show
+PS C:\Users\Johnnyvng.JVDNT\Documents\GitHub\kubernetes> az account show
+{
+  "environmentName": "AzureCloud",
+  "homeTenantId": "12630675-1f0d-411c-ace5-a77cd5f48912",
+  "id": "5eaeebcc-b962-4628-98d1-8e0fe5d276a3",
+  "isDefault": true,
+  "managedByTenants": [],
+  "name": "Azure for Students",
+  "state": "Enabled",
+  "tenantDefaultDomain": "exchangelabs.gmu.edu",
+  "tenantDisplayName": "George Mason University",
+  "tenantId": "12630675-1f0d-411c-ace5-a77cd5f48912",
+  "user": {
+    "name": "dnguye33@masonlive.gmu.edu",
+    "type": "user"
+  }
+}
+
+
+az ad sp create-for-rbac --name "myServicePrincipal" --role="Owner" --scopes="/subscriptions/5eaeebcc-b962-4628-98d1-8e0fe5d276a3"
+
+# Set Role and Scope: Assign the service principal an owner role and specify the subscription scope.
+# Login with Service Principal: Use az login --service-principal along with the app ID, password, and tenant ID to log in.
+# Verification: Confirm the login by checking the user property in the returned JSON object, which should indicate servicePrincipal.
+
 
