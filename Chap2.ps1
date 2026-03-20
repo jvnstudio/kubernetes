@@ -72,6 +72,7 @@ aws configure
 aws sts assume-role --role-arn arn:aws:iam::546079882565:role/K8s --external-id SuperSecret_ExtID --role-session-name JVN_K8s_SessionName
 
 # In PowerShell, capture the returned credentials and export them with $env: variables.
+# If aws sts get-caller-identity still shows the IAM user ARN, you have not switched into the role yet.
 $role = aws sts assume-role --role-arn arn:aws:iam::546079882565:role/K8s --external-id SuperSecret_ExtID --role-session-name JVN_K8s_SessionName | ConvertFrom-Json
 $env:AWS_ACCESS_KEY_ID = $role.Credentials.AccessKeyId
 $env:AWS_SECRET_ACCESS_KEY = $role.Credentials.SecretAccessKey
@@ -80,4 +81,6 @@ $env:AWS_SESSION_TOKEN = $role.Credentials.SessionToken
 
 
 # Verification: Verify the setup by running AWS CLI commands to ensure permissions are correctly applied.
+aws sts get-caller-identity
+aws ec2 describe-instances --max-items 1
 
