@@ -19,9 +19,10 @@ wsl --install
 
 podman run --rm hello-world
 
+Set-Alias -Name docker -Value podman
+
 docker run --rm hello-world
 
-Set-Alias -Name docker -Value podman
 
 # Install Kind https://kind.sigs.k8s.io/docs/user/quick-start/
 curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.31.0/kind-windows-amd64
